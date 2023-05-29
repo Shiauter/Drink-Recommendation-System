@@ -1,7 +1,6 @@
 import csv
 import numpy as np
 from flask import Flask, request, render_template
-import pickle
 from predict import recommendation
 
 app = Flask(__name__)
