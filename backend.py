@@ -8,10 +8,10 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     # read feature data here
-    # with open("item_attributes.csv", "r") as file:
-        # rows = csv.reader(file, delimiter=',')
-        # header = next(rows)
-    return render_template('index.html')
+    with open("item_attributes.csv", "r") as file:
+        rows = csv.reader(file, delimiter=',')
+        header = next(rows)
+    return render_template('index.html', features=header[1:])
 
 @app.route('/result',methods=['POST'])
 def predict():
