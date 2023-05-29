@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>志學飲料推薦系統</title>
+	</head>
+	
+	<body>
+
+		
+		<h1>
+			<a href="/">志學飲料推薦系統</a>
+		</h1>
+		
+		{% if data %}
+		<p>Recommendation for you</p>
+		<p>{{ data }}</p>
+		{% endif %}
+		<form action="/result" method="post" id="form">
+			<input type="submit" value="Start Recommendation">
+			<br><br>
+			{% for option in features %}
+				<input type="checkbox" id="{{ option }}" name="{{ option }}" value="{{ option }}">
+				<label >{{ option }}</label>
+            {% endfor %}
+		</form>
+
+	</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>志學飲料推薦系統</title>
+	</head>
+	
+	<body>
+
+		
+		<h1>
+			<a href="/">志學飲料推薦系統</a>
+		</h1>
+		
+		<p>Recommendation for {{ features }}</p>
+		{% if data %}
+			{% for method in data %}
+				<p>{{ method }}</p>
+				<ol type="1">
+					{% for item in data[method] %}
+						<li>{{ item }}</li>
+					{% endfor %}
+				</ol>
+			{% endfor %}
+		{% endif %}
+
+	</body>
+</html>
