@@ -19,3 +19,6 @@ def predict():
     print(features)
     res = recommendation(features)
     return render_template('result.html', data=res, features=features)
+
+if __name__ == "__main__":
+    app.run()
