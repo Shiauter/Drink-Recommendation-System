@@ -63,7 +63,6 @@ def recommend_similar_items(items, method, num_recommendations):
 def recommendation(form_input):
     header, names, attributes = get_data()
     custom_item = list(map(lambda x: 1 if x in form_input else 0, header))
-    print(custom_item)
     num_recommendations = 5
     attributes_with_custom_item = np.array(attributes + [custom_item])
 

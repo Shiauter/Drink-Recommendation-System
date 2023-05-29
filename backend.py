@@ -16,7 +16,6 @@ def home():
 @app.route('/result',methods=['POST'])
 def predict():
     features = [v for v in request.form.values()]
-    print(features)
     res = recommendation(features)
     return render_template('result.html', data=res, features=features)
 
