@@ -7,7 +7,7 @@ def get_data():
     header = None
     names = []
     attributes = []
-    with open("item_attributes.csv", "r") as file:
+    with open("data.csv", "r", encoding="utf-8") as file:
         rows = csv.reader(file, delimiter=',')
         for row in rows:
             if header is None:
@@ -57,13 +57,13 @@ def recommend_similar_items(items, method, num_recommendations):
         _, indices = balltree.query([items[-1]], k=num_recommendations)
         similar_items = indices.flatten().tolist()
         
-    return similar_items[:]
+    return similar_items[:num_recommendations]
 
 
 def recommendation(form_input):
     header, names, attributes = get_data()
     custom_item = list(map(lambda x: 1 if x in form_input else 0, header))
-    num_recommendations = 5
+    num_recommendations = 10
     attributes_with_custom_item = np.array(attributes + [custom_item])
 
     methods = ["KMeans", "DBSCAN", "NearestNeighbors", "KDTree", "BallTree"]

@@ -1,17 +1,14 @@
 import csv
 import numpy as np
 from flask import Flask, request, render_template
-from predict import recommendation
+from predict import recommendation, get_data
 
 app = Flask(__name__)
 
 @app.route('/')
 def home():
-    # read feature data here
-    with open("item_attributes.csv", "r", encoding="utf-8") as file:
-        rows = csv.reader(file, delimiter=',')
-        header = next(rows)
-    return render_template('index.html', features=header[1:])
+    header, _, _ = get_data()
+    return render_template('index.html', features=header)
 
 @app.route('/result',methods=['POST'])
 def predict():
