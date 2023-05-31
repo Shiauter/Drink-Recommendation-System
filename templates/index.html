@@ -1,28 +1,30 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<link rel="stylesheet" href="{{ url_for('static', filename='mystyle.css') }}">
 		<title>志學飲料推薦系統</title>
 	</head>
 	
 	<body>
-
-		
-		<h1>
-			<a href="/">志學飲料推薦系統</a>
-		</h1>
-		
-		{% if data %}
-		<p>Recommendation for you</p>
-		<p>{{ data }}</p>
-		{% endif %}
-		<form action="/result" method="post" id="form">
-			<input type="submit" value="Start Recommendation">
-			<br><br>
-			{% for option in features %}
-				<input type="checkbox" id="{{ option }}" name="{{ option }}" value="{{ option }}">
-				<label >{{ option }}</label>
-            {% endfor %}
-		</form>
+		<div class="container">
+			<h1>
+				<a href="/">志學飲料推薦系統</a>
+			</h1>
+			
+			<form action="/result" method="post">
+				<div class="submit-button">
+					<input type="submit" value="Start Recommendation">
+				</div>
+				<div class="option-section">
+					{% for option in features %}
+						<div class="options">
+							<input type="checkbox" id="{{ option }}" name="{{ option }}" value="{{ option }}">
+							<label >{{ option }}</label>
+						</div>
+					{% endfor %}
+				</div>
+			</form>
+		</div>
 
 	</body>
 </html>
