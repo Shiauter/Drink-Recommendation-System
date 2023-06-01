@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" href="{{ url_for('static', filename='mystyle.css') }}">
+		<link rel="stylesheet" href="{{ url_for('static', filename='result.css') }}">
 		<title>志學飲料推薦系統</title>
 	</head>
 	
 	<body>
 
-		<div class="content">
+		<div class="container">
 			<h1>
 				<a href="/">志學飲料推薦系統</a>
 			</h1>
@@ -15,12 +15,14 @@
 			<p>Recommendation for {{ features }}</p>
 			{% if data %}
 				{% for method in data %}
-					<p>{{ method }}</p>
-					<ol type="1">
-						{% for item in data[method] %}
-							<li>{{ item }}</li>
-						{% endfor %}
-					</ol>
+					<div class="method">
+						<h3>{{ method }}</h3>
+						<ol type="1">
+							{% for item in data[method] %}
+								<li>{{ item }}</li>
+							{% endfor %}
+						</ol>
+					</div>
 				{% endfor %}
 			{% endif %}
 		</div>

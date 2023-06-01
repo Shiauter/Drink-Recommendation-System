@@ -19,10 +19,7 @@ def get_data():
     header = header[1:]
     return header, names, attributes
 
-def recommend_similar_items(items, method, num_recommendations):
-    num_recommendations += 1
-    if num_recommendations > len(items):
-        num_recommendations = len(items)
+def recommend_similar_items(items, method):
     similar_items = []
     
     if method == "KMeans":
@@ -34,7 +31,7 @@ def recommend_similar_items(items, method, num_recommendations):
         similar_items = cluster_items.tolist()
         
     elif method == "DBSCAN":
-        dbscan = DBSCAN(eps=0.5, min_samples=num_recommendations)
+        dbscan = DBSCAN(eps=0.5, min_samples=len(items))
         dbscan.fit(items)
         labels = dbscan.labels_
         cluster_label = labels[-1]
@@ -42,22 +39,22 @@ def recommend_similar_items(items, method, num_recommendations):
         similar_items = cluster_items.tolist()
         
     elif method == "NearestNeighbors":
-        nn = NearestNeighbors(n_neighbors=num_recommendations)
+        nn = NearestNeighbors(n_neighbors=len(items))
         nn.fit(items)
         _, indices = nn.kneighbors([items[-1]])
         similar_items = indices.flatten().tolist()
         
     elif method == "KDTree":
         kdtree = KDTree(items)
-        _, indices = kdtree.query([items[-1]], k=num_recommendations)
+        _, indices = kdtree.query([items[-1]], k=len(items))
         similar_items = indices.flatten().tolist()
         
     elif method == "BallTree":
         balltree = BallTree(items)
-        _, indices = balltree.query([items[-1]], k=num_recommendations)
+        _, indices = balltree.query([items[-1]], k=len(items))
         similar_items = indices.flatten().tolist()
         
-    return similar_items[:num_recommendations]
+    return similar_items
 
 
 def recommendation(form_input):
@@ -70,10 +67,12 @@ def recommendation(form_input):
     res = {}
     for i, m in enumerate(methods):
 #         print(f"{i + 1}. {m}")
-        similar_items = recommend_similar_items(attributes_with_custom_item, m, num_recommendations)
+        similar_items = recommend_similar_items(attributes_with_custom_item, m)
+        print(len(similar_items))
 #         print(f"Recommendation for custom_item: ")
         res[m] = []
         for idx in similar_items:
+            if len(res[m]) >= num_recommendations: break
             if idx < len(names):
 #                 print(f"- {names[idx]} ({idx})")
                 res[m].append(names[idx])

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" href="{{ url_for('static', filename='mystyle.css') }}">
+		<link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
 		<title>志學飲料推薦系統</title>
 	</head>
 	
@@ -12,14 +12,14 @@
 			</h1>
 			
 			<form action="/result" method="post">
-				<div class="submit-button">
-					<input type="submit" value="Start Recommendation">
-				</div>
+				<button type="submit" class="submit-button">開始推薦物品</button>
 				<div class="option-section">
 					{% for option in features %}
 						<div class="options">
-							<input type="checkbox" id="{{ option }}" name="{{ option }}" value="{{ option }}">
-							<label >{{ option }}</label>
+							<label>
+								<input type="checkbox" id="{{ option }}" name="{{ option }}" value="{{ option }}">
+								<span>{{ option }}</span
+							</label>
 						</div>
 					{% endfor %}
 				</div>
