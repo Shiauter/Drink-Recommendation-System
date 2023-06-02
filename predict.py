@@ -23,7 +23,7 @@ def recommend_similar_items(items, method):
     similar_items = []
     
     if method == "KMeans":
-        kmeans = KMeans(n_clusters=2) # 要找這個的值
+        kmeans = KMeans(n_clusters=8, n_init='auto') # 要找這個的值
         kmeans.fit(items)
         labels = kmeans.labels_
         cluster_label = labels[-1]
@@ -31,7 +31,7 @@ def recommend_similar_items(items, method):
         similar_items = cluster_items.tolist()
         
     elif method == "DBSCAN":
-        dbscan = DBSCAN(eps=0.5, min_samples=len(items))
+        dbscan = DBSCAN(eps=0.5, min_samples=10)
         dbscan.fit(items)
         labels = dbscan.labels_
         cluster_label = labels[-1]
@@ -63,12 +63,12 @@ def recommendation(form_input):
     num_recommendations = 10
     attributes_with_custom_item = np.array(attributes + [custom_item])
 
-    methods = ["KMeans", "DBSCAN", "NearestNeighbors", "KDTree", "BallTree"]
+    methods = ["NearestNeighbors", "KDTree", "BallTree", "KMeans", "DBSCAN"]
     res = {}
     for i, m in enumerate(methods):
 #         print(f"{i + 1}. {m}")
         similar_items = recommend_similar_items(attributes_with_custom_item, m)
-        print(len(similar_items))
+        # print(len(similar_items))
 #         print(f"Recommendation for custom_item: ")
         res[m] = []
         for idx in similar_items:

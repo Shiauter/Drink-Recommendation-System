@@ -2,6 +2,9 @@ import csv
 import numpy as np
 from flask import Flask, request, render_template
 from predict import recommendation, get_data
+import os
+
+os.environ["OMP_NUM_THREADS"] = '1'
 
 app = Flask(__name__)
 

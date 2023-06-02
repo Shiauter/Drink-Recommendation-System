@@ -32,6 +32,7 @@ body {
 
 .method {
 	display: inline-block;
+	min-height: 325px;
 	height: auto;
 	width: 30%;
 	margin: 0;
