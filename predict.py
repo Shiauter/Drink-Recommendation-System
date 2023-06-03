@@ -23,7 +23,7 @@ def recommend_similar_items(items, method):
     similar_items = []
     
     if method == "KMeans":
-        kmeans = KMeans(n_clusters=8, n_init='auto') # 要找這個的值
+        kmeans = KMeans(n_clusters=8, n_init=10) # 要找這個的值
         kmeans.fit(items)
         labels = kmeans.labels_
         cluster_label = labels[-1]
